@@ -58,6 +58,13 @@ export default function Panel() {
     loadImages();
   }
 
+  const folderInputProps = {
+    type: "file" as const,
+    multiple: true,
+    onChange: handleFolder,
+    className: "hidden",
+  };
+
   return (
     <main className="min-h-screen bg-gray-950 text-gray-200 p-8">
       <div className="flex justify-between items-center mb-8">
@@ -77,25 +84,14 @@ export default function Panel() {
         <label className="inline-block px-6 py-4 bg-emerald-500 text-black font-bold rounded-xl cursor-pointer hover:bg-emerald-400">
           📁 ফোল্ডার সিলেক্ট (সব ছবি একসাথে)
           <input
-            type="file"
-            // @ts-ignore
-            webkitdirectory="true"
-            directory=""
-            multiple
-            onChange={handleFolder}
-            className="hidden"
+            {...folderInputProps}
+            {...({ webkitdirectory: "true", directory: "" } as any)}
           />
         </label>
 
         <label className="inline-block px-6 py-4 bg-blue-500 text-black font-bold rounded-xl cursor-pointer hover:bg-blue-400">
           🖼️ গ্যালারি থেকে বাছুন
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleFolder}
-            className="hidden"
-          />
+          <input {...folderInputProps} accept="image/*" />
         </label>
       </div>
 
